@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#blazor-error-ui {
+    display: none;
+}
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 2.5s, opacity 2.5s linear;
+}
+
+.visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 2.5s linear;
+}
+  
+
+[class^='icon-']::before {
+    font-size: 23px;
+    text-align: center;
+    vertical-align: bottom;
+    margin-right: 0;
+}
+
+.main-gradient {
+    --tw-gradient-stops: #020f33, #000000, #000000, #042505;
+}
+
+.footer {
+    --tw-gradient-stops: #425b422b, #0e120e9c;
+}

@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.2",
+    "cross-env": "^7.0.3",
+    "tailwindcss": "^3.0.24"
+  },
+  "scripts": {
+    "tailwind": "cross-env NODE_ENV=development ./node_modules/tailwindcss/lib/cli.js -i ./Shared/Styles.css -o ./wwwroot/css/app.css --watch --minify"
+  },
+  "dependencies": {
+    "daisyui": "^2.13.6"
+  }
+}

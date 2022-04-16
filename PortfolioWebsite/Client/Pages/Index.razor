@@ -1,0 +1,38 @@
+﻿@page "/"
+
+@inject NavigationManager nav
+@inject IJSRuntime jsRuntime
+
+<PageTitle>Stefan Milanovic | Portfolio</PageTitle>
+
+<div class="hero min-h-screen min-w-screen">
+    <div class="hero-content text-center">
+        <div class="max-w-md">
+            <h1 class="text-5xl font-bold">Hello there</h1>
+            <p class="py-6">I'm currently rebuilding my portfoilo website! Stay tuned. Follow me on LinkedIn
+                for progress updates.</p>
+
+            <div class="flex space-x-10 justify-center">
+                <div @onclick="onProfileClick" class="icon-linkedin-squared btn btn-primary btn-outline gap-2">
+                    Profile
+                </div>
+                <div @onclick="onResumeClick" class="icon-doc-text-inv btn btn-primary btn-outline gap-2">
+                    Resume
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+
+    public async void onProfileClick() {
+        await jsRuntime.InvokeAsync<object>("open", "https://www.linkedin.com/in/stefanmilanovic/", "_blank");
+    }
+
+    public async void onResumeClick() {
+        await jsRuntime.InvokeAsync<object>("open", "/Milanovic-Stefan-Resume.pdf", "_blank");
+    }
+    
+
+}

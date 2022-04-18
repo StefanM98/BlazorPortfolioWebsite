@@ -1,11 +1,10 @@
 ﻿@page "/"
 
-@inject NavigationManager nav
 @inject IJSRuntime jsRuntime
 
 <PageTitle>Stefan Milanovic | Portfolio</PageTitle>
 
-<div @ref="hero" class="hero min-h-screen min-w-screen">
+<div class="hero min-h-screen min-w-screen">
     <div class="hero-content text-center">
         <div class="max-w-md">
             <h1 class="text-5xl font-bold">Hello there</h1>
@@ -25,8 +24,6 @@
 </div>
 
 @code {
-    private ElementReference hero;
-
     public async void onProfileClick() {
         await jsRuntime.InvokeAsync<object>("open", "https://www.linkedin.com/in/stefanmilanovic/", "_blank");
     }
@@ -34,10 +31,4 @@
     public async void onResumeClick() {
         await jsRuntime.InvokeAsync<object>("open", "/Milanovic-Stefan-Resume.pdf", "_blank");
     }
-    
-
-    protected override async Task OnAfterRenderAsync(bool firstRender) {
-        if (firstRender) await hero.FocusAsync();
-    }
-
 }

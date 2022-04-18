@@ -25,6 +25,10 @@
     margin-right: 0;
 }
 
+[class^='text-']:focus-visible {
+    outline: none;
+}
+
 .main-gradient {
     --tw-gradient-stops: #001883, #3e00ff, #001591, #020033;
 }

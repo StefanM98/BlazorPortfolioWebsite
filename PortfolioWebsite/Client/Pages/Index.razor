@@ -5,7 +5,7 @@
 
 <PageTitle>Stefan Milanovic | Portfolio</PageTitle>
 
-<div class="hero min-h-screen min-w-screen">
+<div @ref="hero" class="hero min-h-screen min-w-screen">
     <div class="hero-content text-center">
         <div class="max-w-md">
             <h1 class="text-5xl font-bold">Hello there</h1>
@@ -24,7 +24,8 @@
     </div>
 </div>
 
-@functions {
+@code {
+    private ElementReference hero;
 
     public async void onProfileClick() {
         await jsRuntime.InvokeAsync<object>("open", "https://www.linkedin.com/in/stefanmilanovic/", "_blank");
@@ -34,5 +35,9 @@
         await jsRuntime.InvokeAsync<object>("open", "/Milanovic-Stefan-Resume.pdf", "_blank");
     }
     
+
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if (firstRender) await hero.FocusAsync();
+    }
 
 }

@@ -6,8 +6,8 @@
 trigger:
 - main
 
-pool:
-  vmImage: 'ubuntu-20.04'
+# Self-hosted build agent pool
+pool: TANDY
 
 variables:
   solution: '**/PortfolioWebsite.Server.sln'

@@ -67,9 +67,11 @@ stages:
   dependsOn: Build
   condition: succeeded()
   jobs:
-  - deployment: Deployment
-    displayName: 'Deployment'
-    environment: '$(deployEnvironment)'
+  - deployment: DeployProd
+    displayName: 'Deploy to Production Environment'
+    environment: 
+      name: '$(deployEnvironment)'
+      resourceType: VirtualMachine
     strategy:
       rolling:
         maxParallel: 1

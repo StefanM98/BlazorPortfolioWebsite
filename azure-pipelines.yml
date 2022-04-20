@@ -80,15 +80,8 @@ stages:
           - task: DownloadPipelineArtifact@2
             inputs:
               artifact: BlazorPortfolioWebsite
-              path: '~/latest'
-          # - task: CopyFiles@2
-          #   displayName: 'Copy build artifacts'
-          #   inputs:
-          #     SourceFolder: '$(Pipeline.Workspace)/drop'
-          #     Contents: '**'
-          #     TargetFolder: '~/latest'
-          #     CleanTargetFolder: true
+              path: '/home/stefan/latest'
           - task: ShellScript@2
             displayName: 'Run deployment script'
             inputs:
-              scriptPath: '~/deploy.sh'
+              scriptPath: '/home/stefan/deploy.sh'

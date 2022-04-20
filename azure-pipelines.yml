@@ -1,0 +1,50 @@
+# Azure Pipeline
+# Builds and Publishes the .NET 6 Core Server and saves the build artifacts.
+# 
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-20.04'
+
+variables:
+  solution: '**/PortfolioWebsite.Server.sln'
+  project: '**/PortfolioWebsite.Server.csproj'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: UseDotNet@2
+  displayName: 'Use .Net Core 6'
+  inputs:
+    version: 6.0.x
+    includePreviewVersions: true
+    performMultiLevelLookup: true
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '$(project)'
+
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: 'build'
+    projects: '$(project)'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Publish
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: '$(project)'
+    arguments: '--configuration $(buildConfiguration) --output $(build.artifactStagingDirectory)'
+
+- task: PublishPipelineArtifact@1
+  displayName: "Publish Artifact"
+  inputs:
+    targetPath: '$(build.artifactStagingDirectory)' 
+    artifactName: 'BlazorPortfolioWebsite'

@@ -30,15 +30,16 @@ else
 
 app.UseHttpsRedirection();
 
-app.UseBlazorFrameworkFiles();
-app.UseStaticFiles();
+var clientRoot = "/wwwroot";
+app.UseBlazorFrameworkFiles(clientRoot);
+app.UseStaticFiles(clientRoot);
 
 app.UseRouting();
 
 
 app.MapRazorPages();
 app.MapControllers();
-app.MapFallbackToFile("index.html");
+app.MapFallbackToFile(clientRoot + "/index.html");
 
 // Start Tailwind CSS hot reloading
 if (app.Environment.IsDevelopment())

@@ -1,0 +1,87 @@
+# Azure Pipeline
+# @author Stefan Milanovic
+#
+# Builds, publishes, and deploys the BlazorPortfolio Website project.
+# 
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - main
+
+resources:
+- repo: self
+
+variables:
+  solution: '**/PortfolioWebsite.Server.sln'
+  project: '**/PortfolioWebsite.Server.csproj'
+  buildConfiguration: 'Release'
+  buildPool: 'TANDY' # Self-hosted build agent pool
+  deployEnvironment: 'Production'
+
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool: '$(buildPool)'
+    steps:
+      - task: UseDotNet@2
+        displayName: 'Use .Net Core 6'
+        inputs:
+          version: 6.0.x
+          includePreviewVersions: true
+          performMultiLevelLookup: true
+
+      - task: DotNetCoreCLI@2
+        inputs:
+          command: 'restore'
+          projects: '$(project)'
+
+      - task: DotNetCoreCLI@2
+        displayName: 'Build App'
+        inputs:
+          command: 'build'
+          projects: '$(project)'
+          arguments: '--configuration $(buildConfiguration)'
+
+      - task: DotNetCoreCLI@2
+        displayName: Publish
+        inputs:
+          command: 'publish'
+          publishWebProjects: false
+          projects: '$(project)'
+          arguments: '--configuration $(buildConfiguration) --output $(build.artifactStagingDirectory)'
+
+      - task: PublishPipelineArtifact@1
+        displayName: "Publish Artifact"
+        inputs:
+          targetPath: '$(build.artifactStagingDirectory)' 
+          artifactName: 'BlazorPortfolioWebsite'
+
+- stage: Deploy
+  displayName: 'Deploy'
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - deployment: DeployProd
+    displayName: 'Deploy to Production Environment'
+    environment: 
+      name: '$(deployEnvironment)'
+      resourceType: VirtualMachine
+    strategy:
+      rolling:
+        maxParallel: 1
+        deploy:
+          steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifact: BlazorPortfolioWebsite
+              path: '/home/stefan/latest'
+          - task: ShellScript@2
+            displayName: 'Run deployment script'
+            inputs:
+              scriptPath: '/home/stefan/deploy.sh'

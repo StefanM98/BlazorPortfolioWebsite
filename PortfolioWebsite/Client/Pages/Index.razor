@@ -1,38 +1,8 @@
 ﻿@page "/"
 
-@inject IJSRuntime jsRuntime
-
 <PageTitle>Stefan Milanovic | Portfolio</PageTitle>
 
-
-<div class="navbar bg-base-100">
-  <div class="navbar-start">
-    <div class="dropdown">
-      <label tabindex="0" class="btn btn-ghost md:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-      </label>
-      <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a>About</a></li>
-        <li><a>Experience</a></li>
-        <li><a>Work</a></li>
-        <li><a>Contact</a></li>
-      </ul>
-    </div>
-    <a class="btn btn-ghost normal-case text-xl">SM</a>
-  </div>
-  <div class="navbar-center hidden md:flex">
-    <ul class="menu menu-horizontal p-0">
-      <li><a>About</a></li>
-      <li><a>Experience</a></li>
-      <li><a>Work</a></li>
-      <li><a>Contact</a></li>
-    </ul>
-  </div>
-  <div class="navbar-end">
-    <a @onclick="onResumeClick" class="btn">Resume</a>
-  </div>
-</div>
-
+@* Main Hero Section *@
 <section>
   <div class="hero min-h-screen py-10">
     <div class="hero-content flex-col lg:flex-row-reverse h-full w-[80vw] max-w-6xl px-5">
@@ -61,16 +31,27 @@
     </div>
   </div>
 </section>
+
+@* About Me Section *@
+<section>
+  <div></div>
+</section>
+
+@* Experience Section *@
+<section>
+  <div></div>
+</section>
+
+@* Work Section *@
+<section>
+  <div></div>
+</section>
+
+@* Contact Section *@
 <section>
   <div></div>
 </section>
 
 @code {
-    public async void onProfileClick() {
-        await jsRuntime.InvokeAsync<object>("open", "https://www.linkedin.com/in/stefanmilanovic/", "_blank");
-    }
 
-    public async void onResumeClick() {
-        await jsRuntime.InvokeAsync<object>("open", "/Milanovic-Stefan-Resume.pdf", "_blank");
-    }
 }

@@ -4,24 +4,66 @@
 
 <PageTitle>Stefan Milanovic | Portfolio</PageTitle>
 
-<div class="hero min-h-screen min-w-screen">
-    <div class="hero-content text-center">
-        <div class="max-w-md">
-            <h1 class="text-5xl font-bold">Hello there</h1>
-            <p class="py-6">I'm currently rebuilding my portfoilo website! Stay tuned. Follow me on LinkedIn
-                for progress updates.</p>
 
-            <div class="flex space-x-10 justify-center">
-                <div @onclick="onProfileClick" class="icon-linkedin-squared btn btn-primary btn-outline gap-2">
-                    Profile
-                </div>
-                <div @onclick="onResumeClick" class="icon-doc-text-inv btn btn-primary btn-outline gap-2">
-                    Resume
-                </div>
-            </div>
-        </div>
+<div class="navbar bg-base-100">
+  <div class="navbar-start">
+    <div class="dropdown">
+      <label tabindex="0" class="btn btn-ghost md:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+      </label>
+      <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a>About</a></li>
+        <li><a>Experience</a></li>
+        <li><a>Work</a></li>
+        <li><a>Contact</a></li>
+      </ul>
     </div>
+    <a class="btn btn-ghost normal-case text-xl">SM</a>
+  </div>
+  <div class="navbar-center hidden md:flex">
+    <ul class="menu menu-horizontal p-0">
+      <li><a>About</a></li>
+      <li><a>Experience</a></li>
+      <li><a>Work</a></li>
+      <li><a>Contact</a></li>
+    </ul>
+  </div>
+  <div class="navbar-end">
+    <a @onclick="onResumeClick" class="btn">Resume</a>
+  </div>
 </div>
+
+<section>
+  <div class="hero min-h-screen py-10">
+    <div class="hero-content flex-col lg:flex-row-reverse h-full w-[80vw] max-w-6xl px-5">
+      <div class="hero-image">
+        <svg class="hexagon version="1.1" xmlns="http://www.w3.org/2000/svg" width="330" height="342" viewbox="0 0 173.20508075688772 200" style="filter: drop-shadow(rgba(255, 255, 255, 0.5) 0px 0px 10px);">
+          <path d="M69.28203230275508 9.999999999999998Q86.60254037844386 0 103.92304845413264 9.999999999999998L155.88457268119896 40Q173.20508075688772 50 173.20508075688772 70L173.20508075688772 130Q173.20508075688772 150 155.88457268119896 160L103.92304845413264 190Q86.60254037844386 200 69.28203230275508 190L17.320508075688775 160Q0 150 0 130L0 70Q0 50 17.320508075688775 40Z"
+            stroke="#b3c5ef" 
+            stroke-width="2" 
+            fill="transparent" />
+        </svg>
+        <div class="img-wrapper max-w-sm rounded-lg shadow-2xl mask mask-hexagon">
+          <img src="images/me-square.jpg" class="max-w-sm rounded-lg shadow-2xl mask mask-hexagon tint bg-blend-color" />
+        </div>
+      </div>
+      <div>
+        <h1 class="text-xl font-bold font-mono">Hi, my name is</h1>
+        <h1 class="text-7xl font-bold">Stefan Milanovic</h1>
+        <p class="py-6 text-xl">
+            I'm a Software Engineer with industry experience building web applications. 
+            Currently, I'm taking a professional development break to learn C#, .NET 
+            Xamarin/Maui, and Blazor Webassembly by designing and building a cross-
+            platform eccommerce application for a small and local business!
+        </p>
+        <button class="btn btn-primary my-1">Blog Coming Soon!</button>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div></div>
+</section>
 
 @code {
     public async void onProfileClick() {

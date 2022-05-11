@@ -4,18 +4,7 @@
 
 #blazor-error-ui {
     display: none;
-}
-
-.hidden {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s 2.5s, opacity 2.5s linear;
-}
-
-.visible {
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 2.5s linear;
+    position: absolute;
 }
   
 [class^='icon-']::before {
@@ -33,13 +22,37 @@
     --tw-gradient-stops: #001883, #3e00ff, #001591, #020033;
 }
 
-.hero-content {
-    background-color: #23232342;
-    border-radius: 6%;
-    padding: 45px;
-    max-width: 95vw;
+.hero-image {
+    position: relative;
+    padding-bottom: 24px;
+    margin-left: 2em;
+
 }
 
-.footer {
-    background-color: #111111;
+.img-wrapper {
+    @apply block relative w-full bg-primary transition-all duration-[500ms] ease-in-out;
+    @apply hover:bg-transparent hover:outline-0;
+    @apply focus:bg-transparent focus:outline-0;
+}
+
+.img-wrapper:hover > img, 
+.img-wrapper:focus > img {
+    @apply filter-none mix-blend-normal;
+}
+
+.img-wrapper > img {
+    @apply w-full relative mix-blend-multiply grayscale contrast-100 transition-all duration-[400ms] ease-in-out;
+}
+
+
+.hero-image > .img-wrapper {
+    @apply w-[330px];
+}
+
+.hexagon {
+    @apply absolute top-[18px] left-[17px] ease-in-out duration-300;
+}
+
+.hero-image:hover > .hexagon {
+    @apply -translate-x-3 -translate-y-3;
 }

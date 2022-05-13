@@ -1,5 +1,7 @@
 # Blazor WebAssembly (WASM) .NET Hosted Portfolio Site
 
+[![Build Status](https://dev.azure.com/stefan-dev-1/BlazorPortfolioWebsite/_apis/build/status/StefanM98.BlazorPortfolioWebsite?branchName=main)](https://dev.azure.com/stefan-dev-1/BlazorPortfolioWebsite/_build/latest?definitionId=1&branchName=main)
+
 Check it out here: [stefandev.com](https://stefandev.com)
 
 ## Overview 

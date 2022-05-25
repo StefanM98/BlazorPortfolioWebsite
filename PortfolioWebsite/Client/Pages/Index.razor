@@ -1,5 +1,9 @@
 ﻿@page "/"
 
+@inject IJSRuntime jsRuntime
+
+@using PortfolioWebsite.Client.Shared.Components;
+
 <PageTitle>Stefan Milanovic | Portfolio</PageTitle>
 
 @* Main Hero Section *@
@@ -20,11 +24,13 @@
       <div>
         <h1 class="text-xl font-bold font-mono">Hi, my name is</h1>
         <h1 class="text-7xl font-bold">Stefan Milanovic</h1>
-        <p class="py-6 text-xl">
-            I'm a Software Engineer with industry experience building web applications. 
-            Currently, I'm taking a professional development break to learn C#, .NET 
-            Xamarin/Maui, and Blazor Webassembly by designing and building a cross-
-            platform eccommerce application for a small and local business!
+        <p class="pt-5 pb-6 text-xl font-bold">
+             — Software Engineer with 3+ years of industry experience
+        </p>
+        <p class="pt-3 pb-9 text-xl"> 
+            Currently, I'm taking a career development break to learn C#, .NET MAUI, and Blazor 
+            Webassembly by designing and building a cross-platform e-commerce solution for a small & 
+            local buissness, for free!
         </p>
         <button class="btn btn-primary my-1">Blog Coming Soon!</button>
       </div>
@@ -33,25 +39,207 @@
 </section>
 
 @* About Me Section *@
-<section>
-  <div></div>
+<section id="about-me">
+  <div class="hero min-h-screen bg-base-100">
+    <div class="hero-content flex-col lg:flex-row-reverse py-11">
+      <div class="text-center lg:text-left">
+        <h1 class="text-5xl font-bold">About me</h1>
+        <p class="py-6">
+            Hello! My name is Stefan and I enjoy designing and building elegant & performant software solutions.
+        </p>
+        <p class="py-6">
+            My interest in the field began with an early-life facination of computers and how they work. This
+            interest quickly grew into a passion.
+        </p>
+        <p class="py-6">
+          Fast-forward to today, I am learning C#, .NET Xamarin/MAUI, and building my portfolio website using Blazor WebAssembly.
+        </p>
+        <p class="py-6">
+            Here are a few technologies I’ve been working with recently:
+        </p>
+      </div>
+      <div class="flex-shrink-0 w-full max-w-sm content-center contents">
+        <div id="cloud" class="lg:mr-8"></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 @* Experience Section *@
-<section>
-  <div></div>
-</section>
+<section id="experience">
+  <div class="hero bg-black bg-opacity-20">
+    <div class="hero-content w-full lg:w-3/4 flex-col lg:flex-row pt-11 lg:space-x-4">
+      <div class="text-center lg:text-left self-baseline lg:sticky top-0 pt-6 lg:mb-80">
+        <h1 class="text-5xl font-bold">Experience</h1>
+        <p class="py-6">
+            My professional journey began at the age of 16, when I recieved my first technical certification and 
+            began teaching myself how to code. 
+        </p>
+        <p class="py-6">
+            Later, while working as an IT technician, I completed the Full Stack Web Developer online bootcamp from Udacity built in collaboration with 
+            experts at Google. This experience helped me realize my passion for writing code and led me to enrolling in college.
+        </p>
+        <p class="py-6">
+            For most of my college career, I interned at JLG Industries both full-time during breaks and part-time while under a full course load. It
+            was an incredible opportunity to gain relevant real-world experience while earning my degree.
+        </p>
 
-@* Work Section *@
-<section>
-  <div></div>
+      </div>
+      <div class="flex-shrink-0 w-full lg:w-3/5 lg:mt-40 min-w-fit">
+        <ul href="#experience-2015" class="lg:steps lg:steps-vertical text-left lg:pl-1">
+          <div class="xp-divider">2015</div>
+          <li data-content="2015" class="step step-primary">
+            <div>
+              <ExperienceCard Title="CompTIA"
+                  Body="Earned CompTIA A+ Certification"
+                  Image="images/a-plus-logo.svg"
+                  ImageAlt="CompTIA A+ Certification Logo"
+                  ImageClass="w-[150px]"
+                  Tags="IT"/>
+            </div>
+          </li>
+          <div class="xp-divider">2016</div>
+          <li href="#experience-2016" data-content="2016" class="step step-primary">
+            <div>
+              <ExperienceCard Title="Treehouse"
+                  Body="Completed JS Basics Course"
+                  Image="images/teamtreehouse_logo.svg"
+                  ImageAlt="Team Treehouse Logo"
+                  ImageClass="w-[100px]"
+                  Tags="JS,HTML/CSS" />
+              <ExperienceCard Title="Treehouse"
+                  Body="Completed jQuery Basics Course"
+                  Image="images/teamtreehouse_logo.svg"
+                  ImageAlt="Team Treehouse Logo"
+                  ImageClass="w-[100px]"
+                  Tags="JS,jQuery,HTML/CSS" />
+            </div>
+          </li>
+          <div class="xp-divider">2017</div>
+          <li href="#experience-2017" data-content="2017" class="step step-primary">
+            <div>
+              <ExperienceCard Title="SmartSource Inc"
+                  Body="Started role of PC Technician at SmartSource Inc"
+                  Image="images/smartsource_logo.webp"
+                  ImageAlt="SmartSource Logo"
+                  ImageClass="w-[150px]"
+                  Tags="IT" />
+              <ExperienceCard Title="Udacity"
+                  Body="Completed Full Stack Web Developer Nanodegree"
+                  Image="images/udacity-logo.svg"
+                  ImageAlt="Udacity Logo"
+                  ImageClass="w-[100px]"
+                  Tags="JS,Python,SQL,HTML/CSS"/>
+            </div>
+          </li>
+          <div class="xp-divider">2018</div>
+          <li href="#experience-2018" data-content="2018" class="step step-primary">
+            <div>
+              <ExperienceCard Title="Treehouse"
+                  Body="Completed Object-Oriented JS Course"
+                  Image="images/teamtreehouse_logo.svg"
+                  ImageAlt="Team Treehouse Logo"
+                  ImageClass="w-[100px]"
+                  Tags="JS" />
+              <ExperienceCard Title="Treehouse"
+                  Body="Completed Getting Started With ES2015 Course"
+                  Image="images/teamtreehouse_logo.svg"
+                  ImageAlt="Team Treehouse Logo"
+                  ImageClass="w-[100px]"
+                  Tags="JS" />
+            </div>
+          </li>
+          <div class="xp-divider">2019</div>
+          <li href="#experience-2019" data-content="2019" class="step step-primary">
+            <div>
+              <ExperienceCard Title="JLG Industries"
+                  Body="Started Digital Solutions Intern role at JLG Industries"
+                  Image="images/JLG.svg"
+                  ImageAlt="JLG Industries Logo"
+                  ImageClass="w-[100px]"
+                  Tags="TS,JS,Python,Angular,Node.js,HTML/CSS,Jenkins,Jira" />
+            </div>
+          </li>
+          <div class="xp-divider">2022</div>
+          <li href="#experience-2022" data-content="2022" class="step step-primary">
+            <div>
+              <ExperienceCard Title="College"
+                  Body="Graduated as a Bachelor of Science in Software Engineering"
+                  Image="images/ship-logo.webp"
+                  ImageAlt="Shippensburg University of Pennsylvania Stacked Logo"
+                  ImageClass="w-[120px]"
+                  Tags="Cum Laude,Data Science Minor,ABET Accredited" />
+              <ExperienceCard Title="Independent"
+                  Body="Started Professional Career Development Break"
+                  Image="images/calendar-icon.svg"
+                  ImageAlt="Calendar Icon"
+                  ImageClass="w-[120px]"
+                  Tags="C#,.NET Core,Blazor,Xamarin/Maui" />
+            </div>
+          </li>
+          <div class="xp-divider">2023</div>
+          <li data-content="2023" class="step step-neutral">
+            <div>
+              <ExperienceCard Title="What's Next?"
+                  Body="Interested in working together? Let's talk."
+                  Image="images/lets-work-together.svg"
+                  ImageAlt="Let's Work Together text"
+                  ImageClass="w-[120px]"
+                  CardClass="bg-bold-blue"
+                  Tags="Full-time,Contract" />
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
 
 @* Contact Section *@
-<section>
-  <div></div>
+<section id="contact">
+  <div class="hero min-h-[60vh] bg-base-200">
+  <div class="hero-content text-center">
+    <div class="max-w-md">
+      <h1 class="text-5xl font-bold">Get In Touch</h1>
+      <p class="py-6">
+        My mailbox is always open, whether you have a question or simply want to say hello, 
+        I will do my best to respond!
+      </p>
+      <button onclick="location.href='hello@stefandev.com'"; class="btn btn-primary">Say Hello</button>
+    </div>
+  </div>
+</div>
 </section>
 
 @code {
+    protected override void OnAfterRender(bool firstRender) {
+        // Always execute conditionally for loading data, otherwise this will load
+        // every time the page refreshes!
+        if(firstRender) {
+            createCloud();
+        }
+    }
 
+    /*
+     * Load the word cloud data and set properties.
+     */
+    public async void createCloud() {
+        // TODO: Pull this from the database
+        List<string> words = new List<string> {
+            "C#", ".NET", "Java", "C", "Python", "JS", "TS", "Node.js", "Blazor", 
+            "MySQL", "Angular", "R", "Electron", "Xamarin", "Maui", "HTML", 
+            "CSS", "Assembly", "LibGDX", "Vue.js"
+        };
+
+        Dictionary<string, string> options = new Dictionary<string, string>() {
+            {"radius", "220"},
+            {"maxSpeed", "slow"},
+            {"initSpeed", "slow"},
+            {"direction", "140"},   // right-bottom
+            {"keep", "true"}        // interact with cursor move on mouse out
+         };
+
+        // Generate the word cloud
+        await jsRuntime.InvokeAsync<object>("TagCloud", "#cloud", words, options);
+    }
 }

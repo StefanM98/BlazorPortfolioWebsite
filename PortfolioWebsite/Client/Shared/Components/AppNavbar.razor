@@ -1,4 +1,16 @@
-﻿@inject IJSRuntime jsRuntime
+﻿@using Majorsoft.Blazor.Components.Common.JsInterop.Scroll
+@using Microsoft.AspNetCore.Components.Routing
+
+@inject IJSRuntime jsRuntime
+@inject IScrollHandler _scrollHandler
+@implements IAsyncDisposable
+
+@{
+    RenderFragment<ScrollLinkData> link = (data) => 
+        @<li>
+            <a @onclick="@((e) => _scrollHandler.ScrollToElementByIdAsync(@data.ScrollAnchorId))">@data.DisplayText</a>
+        </li>;
+}
 
 <div class="navbar bg-base-100">
   <div class="navbar-start">
@@ -9,20 +21,18 @@
         </svg>
       </label>
       <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a>About</a></li>
-        <li><a>Experience</a></li>
-        <li><a>Work</a></li>
-        <li><a>Contact</a></li>
+           @foreach (var linkData in _links) { 
+               @link(linkData); 
+           }
       </ul>
     </div>
     <a class="btn btn-ghost normal-case text-xl">SM</a>
   </div>
   <div class="navbar-center hidden md:flex">
     <ul class="menu menu-horizontal p-0">
-      <li><a>About</a></li>
-      <li><a>Experience</a></li>
-      <li><a>Work</a></li>
-      <li><a>Contact</a></li>
+        @foreach (var linkData in _links) { 
+            @link(linkData); 
+        }
     </ul>
   </div>
   <div class="navbar-end">
@@ -31,11 +41,20 @@
 </div>
 
 @code {
-    public async void onProfileClick() {
-        await jsRuntime.InvokeAsync<object>("open", "https://www.linkedin.com/in/stefanmilanovic/", "_blank");
-    }
+    private List<ScrollLinkData> _links = new List<ScrollLinkData> {
+        new ScrollLinkData("About", "about-me"),
+        new ScrollLinkData("Experience", "experience"),
+        // new ScrollLinkData("Work", "work"),
+        new ScrollLinkData("Contact", "contact")
+    };
 
     public async void onResumeClick() {
-        await jsRuntime.InvokeAsync<object>("open", "/Milanovic-Stefan-Resume.pdf", "_blank");
+        await jsRuntime.InvokeAsync<object>("open", "/Milanovic-Stefan-Resume.pdf", "_blank");    
+    }
+    
+    public async ValueTask DisposeAsync() {
+        if (_scrollHandler is not null) {
+            await _scrollHandler.DisposeAsync();
+        }
     }
 }

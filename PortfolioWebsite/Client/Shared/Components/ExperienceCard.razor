@@ -1,0 +1,42 @@
+
+
+<div class="card card-side h-64 max-w-md bg-base-100 text-left shadow-xl my-5 lg:m-5 @CardClass">
+    <figure class="min-w-[180px] h-44 m-0">
+        <img class="@ImageClass" src="@Image" alt="@ImageAlt">
+    </figure>
+    <div class="card-body pl-0 pr-5">
+        <div class="prose-lg h-28 flex flex-wrap justify-center items-center">
+            <h2 class="absolute text-xl text-left font-bold bottom-0 mb-6 left-6">@Title</h2>
+            <p class="text-lg">@Body</p>
+        </div>
+        <div class="card-actions justify-end w-56 absolute bottom-5 right-6">
+            @foreach (var tag in Tags.Split(','))
+            {
+                <div class="badge badge-outline">@tag</div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Image { get; set; }
+
+    [Parameter]
+    public string ImageAlt { get; set; }
+
+    [Parameter]
+    public string ImageClass { get; set; }
+
+    [Parameter]
+    public string? CardClass { get; set; }
+
+    [Parameter]
+    public string Body { get; set; }
+
+    [Parameter]
+    public string Tags { get; set; }
+}

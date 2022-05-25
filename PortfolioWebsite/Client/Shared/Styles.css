@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    scroll-behavior: smooth;
+}
+
 #blazor-error-ui {
     display: none;
     position: absolute;
@@ -55,4 +59,43 @@
 
 .hero-image:hover > .hexagon {
     @apply -translate-x-3 -translate-y-3;
+}
+
+#cloud {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.tagcloud {
+    max-width: 80vw;
+}
+
+.tagcloud--item:hover {
+    color: var(--tw-primary);
+}
+
+.step:after {
+    height: 3rem !important;
+    width: 3rem !important;
+    place-self: start !important;
+}
+
+.step:before {
+    --tw-translate-y: -93% !important;
+    margin-left: 36% !important;
+}
+
+.step {
+    gap: 2.5rem !important;
+    grid-template-columns: 70px 1fr !important;
+    min-height: 40rem !important;
+    place-items: start !important;
+}
+
+.xp-divider {
+    @apply divider lg:hidden text-xl pt-16 pb-11;
+}
+
+.bg-bold-blue {
+    background-color: #140b92;
 }

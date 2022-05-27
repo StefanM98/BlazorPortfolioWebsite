@@ -3,34 +3,28 @@
 @tailwind utilities;
 
 html {
-    scroll-behavior: smooth;
+    @apply scroll-smooth
 }
 
 #blazor-error-ui {
-    display: none;
-    position: absolute;
+    @apply hidden absolute;
 }
   
 [class^='icon-']::before {
-    font-size: 23px;
-    text-align: center;
-    vertical-align: bottom;
-    margin-right: 0;
+    @apply text-[23px] text-center align-bottom mr-0;
 }
 
 [class^='text-']:focus-visible {
-    outline: none;
+    @apply outline-none;
 }
 
 .main-gradient {
+    @apply bg-gradient-to-r;
     --tw-gradient-stops: #001883, #3e00ff, #001591, #020033;
 }
 
 .hero-image {
-    position: relative;
-    padding-bottom: 24px;
-    margin-left: 2em;
-
+    @apply relative pb-6 ml-[2em];
 }
 
 .img-wrapper {
@@ -53,49 +47,81 @@ html {
     @apply w-[330px];
 }
 
-.hexagon {
-    @apply absolute top-[18px] left-[17px] ease-in-out duration-300;
-}
-
 .hero-image:hover > .hexagon {
     @apply -translate-x-3 -translate-y-3;
 }
 
+.hexagon {
+    @apply absolute top-[18px] left-[17px] ease-in-out duration-300;
+}
+
 #cloud {
-    font-size: 18px;
-    font-weight: 500;
+    @apply text-[18px] font-medium;
 }
 
 .tagcloud {
-    max-width: 80vw;
+    @apply max-w-[80vw];
 }
 
 .tagcloud--item:hover {
-    color: var(--tw-primary);
+    @apply text-primary;
 }
 
 .step:after {
-    height: 3rem !important;
-    width: 3rem !important;
-    place-self: start !important;
+    @apply !h-12 !w-12 !place-self-start;
+}
+
+.step-primary:before {
+    @apply !bg-primary hidden lg:block;
+}
+
+.step-primary:after {
+    @apply !bg-primary !text-black font-medium hidden lg:block;
+    content: attr(data-content);
 }
 
 .step:before {
-    --tw-translate-y: -93% !important;
-    margin-left: 36% !important;
+    @apply !translate-y-[-93%] !ml-[35%];
+}
+
+.step:last-of-type {
+    @apply before:!translate-y-[-75%];
+    @apply before:!h-[125%];
+}
+
+.step:last-of-type:after {
+    @apply !mt-44;
+}
+
+.step.current {
+    @apply before:!translate-y-[-50%] before:!h-[185%] z-10;
 }
 
 .step {
-    gap: 2.5rem !important;
+    @apply !gap-10 !place-items-start;
     grid-template-columns: 70px 1fr !important;
-    min-height: 40rem !important;
-    place-items: start !important;
 }
 
 .xp-divider {
     @apply divider lg:hidden text-xl pt-16 pb-11;
 }
 
+.xp-container {
+    @apply self-center
+}
+
+.xp-container .card:last-child {
+    @apply mb-20;
+}
+
+.xp-container .card:last-of-type {
+    @apply !mb-20;
+}
+
+.xp-container .card:first-child {
+    @apply mb-0;
+}
+
 .bg-bold-blue {
-    background-color: #140b92;
+    @apply !bg-[#140b92]
 }

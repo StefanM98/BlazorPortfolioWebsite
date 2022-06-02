@@ -11,13 +11,13 @@ module.exports = {
     require('@tailwindcss/typography'),
     require("daisyui")
   ],
-    daisyui: {
-      themes: [
-        { dark: {
-            ...require("daisyui/src/colors/themes")["[data-theme=night]"],
-            "primary": "#b3c5ef",
-            "primary-focus": "#b3c5ef",
-        }}
-      ]
-    }
+  daisyui: {
+    themes: [
+      { dark: {
+          ...require("daisyui/src/colors/themes")["[data-theme=night]"],
+          "primary": "#b3c5ef",
+          "primary-focus": "#b3c5ef",
+      }}
+    ]
+  }
 }

@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Stefan Milanovic | Software Engineer</title>
     <base href="/" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="./css/fontello.css" rel="stylesheet">
     <link href="./css/app.css" rel="stylesheet">
 </head>
 
 <body>
+    <!-- App error alert -->
     <div id="blazor-error-ui" class="mx-10 mt-10">
         <div class="alert alert-error shadow-lg">
             <div>
@@ -20,11 +22,52 @@
     </div>
 
     <div id="app" class="bg-gradient-to-br main-gradient">
+        <!-- App loading spinner -->
         <div id="loading" class="grid place-items-center h-screen">
             <progress class="progress progress-primary w-56"></progress>
         </div>
     </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        let lastKnownScrollPosition = -1;
+        let ticking = false;
 
+        // Helper function that converts any function into a throttled version
+        function throttled(delay, fn) {
+            let lastCall = 0;
+            return function (...args) {
+                const now = (new Date).getTime();
+                if (now - lastCall < delay) {
+                    return;
+                }
+                lastCall = now;
+                return fn(...args);
+            };
+        }
+
+
+        // Handles the scroll event
+        const scrollHandler = () => {
+            if (ticking) return;
+            ticking = true;
+
+            if (window.scrollY > lastKnownScrollPosition) {
+                document.body.classList.add('scrolled-down');
+            } else {
+                document.body.classList.remove('scrolled-down');
+            }
+
+            let scrollRatio = window.pageYOffset / (document.body.offsetHeight - window.innerHeight);
+            document.body.style.setProperty('--scroll', scrollRatio);
+            lastKnownScrollPosition = window.scrollY;
+            ticking = false;
+        }
+
+        // Adds the throttled scroll handler to the scroll event
+        const throttledScrollHandler = throttled(20, scrollHandler);
+        document.addEventListener('scroll', throttledScrollHandler, { passive: true });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/TagCloud@2.2.0/dist/TagCloud.min.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
 </body>
 

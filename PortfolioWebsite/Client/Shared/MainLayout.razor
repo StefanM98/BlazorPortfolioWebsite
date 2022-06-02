@@ -1,16 +1,17 @@
-﻿@inherits LayoutComponentBase
+﻿@using PortfolioWebsite.Client.Shared.Components
+
+@inherits LayoutComponentBase
 
 <div class="page">
     <main>
+        <AppNavbar/>
+        <div class="progress transition-all ease-linear translate-y-0"></div>
+        
+        @* Main Content *@
         <article>
             @Body
         </article>
-        <article>
-            <footer class="footer footer-center p-4 text-base-content">
-              <div>
-                <p>Copyright © 2022 - All right reserved by Stefan Milanovic</p>
-              </div>
-            </footer>
-        </article>
+        
+        <AppFooter/>
     </main>
 </div>

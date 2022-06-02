@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Stefan Milanovic | Software Engineer</title>
     <base href="/" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="./css/fontello.css" rel="stylesheet">
     <link href="./css/app.css" rel="stylesheet">
 </head>
@@ -26,6 +27,24 @@
             <progress class="progress progress-primary w-56"></progress>
         </div>
     </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        let lastKnownScrollPosition = 0;
+        document.addEventListener(
+            'scroll',
+            (event) => {
+                if (window.scrollY > lastKnownScrollPosition) {
+                        document.body.classList.add('scrolled-down');
+                } else {
+                    document.body.classList.remove('scrolled-down');
+                }
+
+                let scrollRatio = window.pageYOffset / (document.body.offsetHeight - window.innerHeight);
+                lastKnownScrollPosition = window.scrollY; 
+            }, 
+            { passive: true }
+        );
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/TagCloud@2.2.0/dist/TagCloud.min.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
 </body>

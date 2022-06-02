@@ -24,7 +24,7 @@ html {
 }
 
 .hero-image {
-    @apply relative pb-6 ml-[2em];
+    @apply relative pb-6 md:ml-[2em];
 }
 
 .img-wrapper {
@@ -59,12 +59,16 @@ html {
     @apply text-[18px] font-medium;
 }
 
-.tagcloud {
-    @apply max-w-[80vw];
-}
-
 .tagcloud--item:hover {
     @apply text-primary;
+}
+
+.tech-list {
+    @apply flex flex-wrap;
+}
+
+.tech-list > li {
+    @apply w-1/2;
 }
 
 .step:after {
@@ -107,11 +111,15 @@ html {
 }
 
 .xp-container {
-    @apply self-center
+    @apply self-center space-y-5;
+}
+
+.xp-container .card {
+    @apply m-auto;
 }
 
 .xp-container .card:last-child {
-    @apply mb-20;
+    @apply lg:mb-20;
 }
 
 .xp-container .card:last-of-type {
@@ -119,9 +127,44 @@ html {
 }
 
 .xp-container .card:first-child {
-    @apply mb-0;
+    @apply lg:mb-0;
 }
 
 .bg-bold-blue {
     @apply !bg-[#140b92]
+}
+
+/* AOS - Progress Bar */
+.progress {
+    @apply bg-primary z-20;
+    height: 3px;
+    width: 0%;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    animation: progress 1s linear;
+
+    /* Pause the animation */
+    animation-play-state: paused;
+    /* Bind the animation to scroll */
+    animation-delay: calc(var(--scroll) * -1s);
+    /* These last 2 properites clean up overshoot weirdness */
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+}
+
+.scrolled-down .progress {
+    top: 0;
+}
+
+@keyframes progress {
+    to {
+        @apply bg-primary;
+        width: 100%;
+    }
+}
+
+/* AOS - Navbar */
+.scrolled-down .navbar {
+    @apply top-[-4rem];
 }

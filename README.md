@@ -21,12 +21,18 @@ The solution contains 3 projects:
 - PortfolioWebsite.Shared.csproj: The model that is shared across both projects
 
 ## Current Status
-The portfolio is currently in a very early stage of development. So far, I have completed the following tasks:
+The portfolio is currently in an early stage of development. So far, I have completed the following tasks:
 
 :heavy_check_mark: Setup the project structure \
 :heavy_check_mark: Setup the project dependencies \
 :heavy_check_mark: Created a temporary landing page \
 :heavy_check_mark: Deployed the project to a [Digital Ocean](https://www.digitalocean.com/) droplet 
+:heavy_check_mark: Finished the main page \
+
+## Planned Features
+- [ ] Add featured projects section
+- [ ] Add blog
+- [ ] Render globalized and localized content from DB
 
 ## Running the project
 1. Install the latest Visual Studio 2022 (at least v17.0.1)

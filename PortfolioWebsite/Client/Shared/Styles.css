@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-    @apply scroll-smooth
+    @apply scroll-smooth;
 }
 
 #blazor-error-ui {
@@ -143,18 +143,10 @@ html {
     top: 64px;
     left: 0;
     animation: progress 1s linear;
-
-    /* Pause the animation */
     animation-play-state: paused;
-    /* Bind the animation to scroll */
     animation-delay: calc(var(--scroll) * -1s);
-    /* These last 2 properites clean up overshoot weirdness */
     animation-iteration-count: 1;
     animation-fill-mode: both;
-}
-
-.scrolled-down .progress {
-    top: 0;
 }
 
 @keyframes progress {
@@ -166,5 +158,13 @@ html {
 
 /* AOS - Navbar */
 .scrolled-down .navbar {
-    @apply top-[-4rem];
+    @apply translate-y-[-4rem];
+}
+
+.scrolled-down .progress {
+    @apply translate-y-[-4rem];
+}
+
+.scrolled-down .dropdown-content {
+    @apply hidden;
 }

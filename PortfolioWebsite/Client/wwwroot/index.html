@@ -29,21 +29,43 @@
     </div>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        let lastKnownScrollPosition = 0;
-        document.addEventListener(
-            'scroll',
-            (event) => {
-                if (window.scrollY > lastKnownScrollPosition) {
-                        document.body.classList.add('scrolled-down');
-                } else {
-                    document.body.classList.remove('scrolled-down');
-                }
+        let lastKnownScrollPosition = -1;
+        let ticking = false;
 
-                let scrollRatio = window.pageYOffset / (document.body.offsetHeight - window.innerHeight);
-                lastKnownScrollPosition = window.scrollY; 
-            }, 
-            { passive: true }
-        );
+        // Helper function that converts any function into a throttled version
+        function throttled(delay, fn) {
+            let lastCall = 0;
+            return function (...args) {
+                const now = (new Date).getTime();
+                if (now - lastCall < delay) {
+                    return;
+                }
+                lastCall = now;
+                return fn(...args);
+            };
+        }
+
+
+        // Handles the scroll event
+        const scrollHandler = () => {
+            if (ticking) return;
+            ticking = true;
+
+            if (window.scrollY > lastKnownScrollPosition) {
+                document.body.classList.add('scrolled-down');
+            } else {
+                document.body.classList.remove('scrolled-down');
+            }
+
+            let scrollRatio = window.pageYOffset / (document.body.offsetHeight - window.innerHeight);
+            document.body.style.setProperty('--scroll', scrollRatio);
+            lastKnownScrollPosition = window.scrollY;
+            ticking = false;
+        }
+
+        // Adds the throttled scroll handler to the scroll event
+        const throttledScrollHandler = throttled(20, scrollHandler);
+        document.addEventListener('scroll', throttledScrollHandler, { passive: true });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/TagCloud@2.2.0/dist/TagCloud.min.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>

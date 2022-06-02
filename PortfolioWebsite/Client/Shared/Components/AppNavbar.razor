@@ -21,12 +21,11 @@
             <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                 @foreach (var linkData in _links)
                 {
-                    @link(linkData)
-                    ;
+                    @link(linkData);
                 }
             </ul>
         </div>
-        <a href="#main-hero" class="btn btn-ghost normal-case text-xl">
+        <a href="#" class="btn btn-ghost normal-case text-xl">
             <img src="/images/logo.svg" alt="Stefan Milanovic Logo" class="h-full" />
         </a>
     </div>
@@ -34,8 +33,7 @@
         <ul class="menu menu-horizontal p-0">
             @foreach (var linkData in _links)
             {
-                @link(linkData)
-                ;
+                @link(linkData);
             }
         </ul>
     </div>

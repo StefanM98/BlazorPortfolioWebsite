@@ -136,12 +136,7 @@ html {
 
 /* AOS - Progress Bar */
 .progress {
-    @apply bg-primary z-20;
-    height: 3px;
-    width: 0%;
-    position: fixed;
-    top: 64px;
-    left: 0;
+    @apply bg-primary z-20 h-[3px] w-[0%] fixed top-16 left-0;
     animation: progress 1s linear;
     animation-play-state: paused;
     animation-delay: calc(var(--scroll) * -1s);
@@ -151,8 +146,7 @@ html {
 
 @keyframes progress {
     to {
-        @apply bg-primary;
-        width: 100%;
+        @apply bg-primary w-full;
     }
 }
 

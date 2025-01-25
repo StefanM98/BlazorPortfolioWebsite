@@ -19,10 +19,6 @@ jobs:
     - name: Publish .NET Project
       run: dotnet publish PortfolioWebsite/Client/PortfolioWebsite.Client.csproj -c Release -o release --nologo
       
-    # Change base tag in index.html from / to BlazorPortfolioWebsite
-    - name: Change base-tag in index.html
-      run: sed -i 's/<base href="\/" \/>/<base href="\/BlazorPortfolioWebsite\/" \/>/g' release/wwwroot/index.html
-      
     # Add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project.
     - name: Add .nojekyll file
       run: touch release/wwwroot/.nojekyll

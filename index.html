@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>Stefan Milanovic | Software Engineer</title>
+    <base href="/BlazorPortfolioWebsite/" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="./css/fontello.css" rel="stylesheet">
+    <link href="./css/app.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- App error alert -->
+    <div id="blazor-error-ui" class="mx-10 mt-10">
+        <div class="alert alert-error shadow-lg">
+            <div>
+                <span>An unhandled error has occurred. Make sure you are using a browser that supports WebAssembly.</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="app" class="bg-gradient-to-br main-gradient">
+        <!-- App loading spinner -->
+        <div id="loading" class="grid place-items-center h-screen">
+            <progress class="progress progress-primary w-56"></progress>
+        </div>
+    </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        let lastKnownScrollPosition = -1;
+        let ticking = false;
+
+        // Helper function that converts any function into a throttled version
+        function throttled(delay, fn) {
+            let lastCall = 0;
+            return function (...args) {
+                const now = (new Date).getTime();
+                if (now - lastCall < delay) {
+                    return;
+                }
+                lastCall = now;
+                return fn(...args);
+            };
+        }
+
+
+        // Handles the scroll event
+        const scrollHandler = () => {
+            if (ticking) return;
+            ticking = true;
+
+            if (window.scrollY > lastKnownScrollPosition) {
+                document.body.classList.add('scrolled-down');
+            } else {
+                document.body.classList.remove('scrolled-down');
+            }
+
+            let scrollRatio = window.pageYOffset / (document.body.offsetHeight - window.innerHeight);
+            document.body.style.setProperty('--scroll', scrollRatio);
+            lastKnownScrollPosition = window.scrollY;
+            ticking = false;
+        }
+
+        // Adds the throttled scroll handler to the scroll event
+        const throttledScrollHandler = throttled(20, scrollHandler);
+        document.addEventListener('scroll', throttledScrollHandler, { passive: true });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/TagCloud@2.2.0/dist/TagCloud.min.js"></script>
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+
+</html>

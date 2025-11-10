@@ -1,2 +1,105 @@
 @import '_content/Majorsoft.Blazor.Components.Common.JsInterop/Majorsoft.Blazor.Components.Common.JsInterop.bundle.scp.css';
 
+/* /Shared/Components/ExperienceCard.razor.rz.scp.css */
+/* ExperienceCard.razor.css - Scoped styles for ExperienceCard component */
+
+/* Container to show that behind the card is truly visible.
+   This might just be your page or another container. */
+.card-container[b-2j8im8m79f] {
+    position: relative;
+    margin: 20px;
+
+    /* Example background behind the card, so you can see
+       the transparency when the corner folds up. */
+    background: radial-gradient(circle, #f0f0f0 0%, #ddd 100%);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* The "card" we are clipping. */
+.card[b-2j8im8m79f] {
+    display: flex;
+    position: relative;
+
+    /* A complex gradient for demonstration.
+       Adjust as needed to match your design. */
+    background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+
+    /* Key: Clip the bottom-right corner so it's actually transparent. */
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - 50px),
+        calc(100% - 50px) 100%,
+        0 100%
+    );
+
+    width: 400px;  /* Example size; tweak as needed */
+    height: 250px;
+    border-radius: 8px;
+    overflow: visible; /* so corner fold can extend outside if needed */
+}
+
+/* Example layout for the figure (left side image) */
+.card-figure[b-2j8im8m79f] {
+    min-width: 140px;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* The main body content to the right of the figure */
+.card-body[b-2j8im8m79f] {
+    flex: 1;
+    padding: 1rem;
+    position: relative;
+}
+
+/* Example styling for your title */
+.card-title[b-2j8im8m79f] {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+/* A simple container for tags */
+.card-tags[b-2j8im8m79f] {
+    margin-top: 1rem;
+}
+
+/* The text behind the fold corner.
+   It sits exactly in the bottom-right area that got clipped.
+   So once the corner is folded up, you see this. */
+.corner-text[b-2j8im8m79f] {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 0; /* behind the corner-fold */
+
+    background-color: rgba(0, 0, 0, 0.6); /* or any color you like */
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+
+    /* Slight offset to look "tucked under" the corner */
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+/* The corner flap that we rotate in 3D with Popmotion. */
+.corner-fold[b-2j8im8m79f] {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+
+    /* Match the same gradient as the card, or approximate it.
+       You may need to tweak background-position to align. */
+    background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+
+    /* Pivot around bottom-right corner so it folds up. */
+    transform-origin: bottom right;
+    transform: rotateX(0deg);
+    backface-visibility: hidden; /* Hide the backside when flipped */
+
+    /* No CSS transition because Popmotion will animate transform. */
+}

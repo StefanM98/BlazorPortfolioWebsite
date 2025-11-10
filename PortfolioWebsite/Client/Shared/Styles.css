@@ -116,6 +116,13 @@ html {
 
 .xp-container .card {
     @apply m-auto;
+    max-width: 450px;
+    width: 100%;
+}
+
+.xp-container .card figure {
+    @apply flex items-center justify-center;
+    min-width: 140px;
 }
 
 .xp-container .card:last-child {

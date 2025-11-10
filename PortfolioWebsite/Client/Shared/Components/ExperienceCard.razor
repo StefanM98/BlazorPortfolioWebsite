@@ -62,8 +62,16 @@
     {
         if (firstRender && ShowDuration && !string.IsNullOrEmpty(StartDate))
         {
-            // Initialize Popmotion-based corner fold animation
-            await JSRuntime.InvokeVoidAsync("initCornerFoldAnimation", CardRef);
+            try
+            {
+                // Initialize Popmotion-based corner fold animation
+                await JSRuntime.InvokeVoidAsync("initCornerFoldAnimation", CardRef);
+            }
+            catch (Exception ex)
+            {
+                // Gracefully handle if the animation library isn't loaded yet
+                Console.WriteLine($"Corner fold animation failed: {ex.Message}");
+            }
         }
     }
 

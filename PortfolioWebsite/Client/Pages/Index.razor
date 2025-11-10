@@ -26,7 +26,7 @@
                 <h1 class="text-xl font-bold font-mono" data-aos="fade-right" data-aos-delay="200">Hi, my name is</h1>
                 <h1 class="text-7xl font-bold" data-aos="fade-right" data-aos-delay="400">Stefan Milanovic</h1>
                 <p class="pt-5 pb-6 text-xl font-bold" data-aos="fade-right" data-aos-delay="600">
-                    — Senior Software Developer with 5+ years of industry experience
+                    — Senior Software Developer with @ProfessionalExperienceYears+ years of industry experience
                 </p>
                 <p class="pt-3 pb-9 text-xl" data-aos="fade-right" data-aos-delay="800">
                     Currently serving as a Senior Software Developer and Data Scientist at <a class="font-bold" href="https://www.linkedin.com/company/meritus-health">Meritus Health</a>, where I've grown from Junior to Senior over 3+ years, mastering C#, React, Next.js, and Python to create groundbreaking tools that enhance patient care and promote community engagement.
@@ -51,7 +51,7 @@
                 </p>
                 <div class="divider hidden lg:flex"></div>
                 <p class="m-0" data-aos="fade-right" data-aos-delay="300">
-                    Over the last 7 years, I've utilized a large variety of technologies to develop <strong>
+                    Over the last @TotalTechYears years, I've utilized a large variety of technologies to develop <strong>
                         cross-platform apps,
                         websites, games, and more.
                     </strong>
@@ -252,7 +252,13 @@
 
 @code {
     private String helloText = "👋 Hello! I'm Stefan, a committed Software Engineer who is passionate about building innovative solutions that leverage cutting-edge technologies to solve complex problems.";
-    
+
+    // Calculate years of professional experience since June 2019
+    private int ProfessionalExperienceYears => (int)Math.Floor((DateTime.Now - new DateTime(2019, 6, 1)).TotalDays / 365.25);
+
+    // Calculate total years working with technology (started learning in 2015)
+    private int TotalTechYears => (int)Math.Floor((DateTime.Now - new DateTime(2015, 1, 1)).TotalDays / 365.25);
+
     protected override void OnAfterRender(bool firstRender)
     {
         // Always execute conditionally for loading data, otherwise this will load

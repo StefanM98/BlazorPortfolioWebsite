@@ -6,6 +6,12 @@ window.initCornerFoldAnimation = (cardRef) => {
     const foldEl = cardRef.querySelector('.corner-fold');
     if (!foldEl) return;
 
+    // Check if popmotion is loaded
+    if (!window.popmotion || !window.popmotion.animate) {
+        console.warn('Popmotion library not loaded yet, skipping corner fold animation');
+        return;
+    }
+
     const { animate } = window.popmotion;  // from popmotion.global.min.js
     let currentAnimation = null;
 

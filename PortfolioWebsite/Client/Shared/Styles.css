@@ -118,7 +118,7 @@ html {
     @apply m-auto flex-row;
     max-width: 500px;
     width: 100%;
-    min-height: 200px;
+    min-height: 300px;
 }
 
 .xp-container .card figure {
@@ -133,6 +133,15 @@ html {
 
 .xp-container .card .card-actions {
     @apply flex-wrap;
+}
+
+.card-side figure > * {
+    margin-left: 30px;
+}
+
+.steps-vertical .step {
+    width: 600px;
+    text-align: left;
 }
 
 .xp-container .card:last-child {

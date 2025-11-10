@@ -6,8 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
 
     <!-- Performance Optimizations -->
-    <!-- Enable AOT compilation for maximum performance (requires wasm-tools-net6 workload) -->
-    <!-- To install: dotnet workload install wasm-tools-net6 -->
+    <!-- Enable AOT compilation for maximum performance (requires wasm-tools workload) -->
+    <!-- To install: dotnet workload install wasm-tools -->
     <RunAOTCompilation Condition="'$(RunAOTCompilation)' == ''">false</RunAOTCompilation>
     <PublishTrimmed>true</PublishTrimmed>
     <TrimMode>link</TrimMode>

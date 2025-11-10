@@ -18,7 +18,7 @@ jobs:
 
     # Install wasm-tools workload for AOT compilation (significant performance boost)
     - name: Install wasm-tools workload
-      run: dotnet workload install wasm-tools-net6
+      run: dotnet workload install wasm-tools
 
     - name: Publish .NET Project with AOT
       run: dotnet publish PortfolioWebsite/Client/PortfolioWebsite.Client.csproj -c Release -o release --nologo -p:RunAOTCompilation=true

@@ -1,42 +1,200 @@
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
 
+<div class="card-container">
+    <div class="card
+                shadow-xl relative
+                @CardClass"
+         data-aos="fade-right" data-aos-offset="100"
+         @ref="CardRef">
 
-<div class="card card-side h-64 max-w-md bg-base-100 text-left shadow-xl my-5 lg:m-5 @CardClass" data-aos="fade-right" data-aos-offset="100">
-    <figure class="min-w-[180px] h-44 m-0">
-        <img class="@ImageClass" src="@Image" alt="@ImageAlt">
-    </figure>
-    <div class="card-body pl-0 pr-5">
-        <div class="prose-lg h-28 flex flex-wrap justify-center items-center">
-            <h2 class="absolute text-xl text-left font-bold bottom-0 mb-6 left-6">@Title</h2>
-            <p class="text-lg">@Body</p>
+        <!-- Example figure (left image) -->
+        <figure class="card-figure">
+            <img class="@ImageClass" src="@Image" alt="@ImageAlt" />
+        </figure>
+
+        <!-- Card body content -->
+        <div class="card-body">
+            <h2 class="card-title">@Title</h2>
+            <p>@Body</p>
+
+            <!-- Example of tags -->
+            <div class="card-tags">
+                @foreach (var tag in Tags.Split(','))
+                {
+                    <span class="badge badge-outline">@tag</span>
+                }
+            </div>
         </div>
-        <div class="card-actions justify-end w-56 absolute bottom-5 right-6">
-            @foreach (var tag in Tags.Split(','))
-            {
-                <div class="badge badge-outline">@tag</div>
-            }
-        </div>
+
+        @if (ShowDuration && !string.IsNullOrEmpty(StartDate))
+        {
+            <!-- The text behind the folded corner. 
+                 This is visible once the corner rotates up. -->
+            <div class="corner-text">
+                <p class="text-sm font-medium">
+                    @StartDate - @(string.IsNullOrEmpty(EndDate) ? "Present" : EndDate)
+                </p>
+                <p class="text-xs opacity-70">@CalculateDuration()</p>
+            </div>
+
+            <!-- The corner flap itself, same size as the clipped corner -->
+            <div class="corner-fold"></div>
+        }
     </div>
 </div>
 
 @code {
-    [Parameter]
-    public string Title { get; set; }
+    [Parameter] public string Title { get; set; } = default!;
+    [Parameter] public string Image { get; set; } = default!;
+    [Parameter] public string ImageAlt { get; set; } = default!;
+    [Parameter] public string ImageClass { get; set; } = default!;
+    [Parameter] public string? CardClass { get; set; }
+    [Parameter] public string Body { get; set; } = default!;
+    [Parameter] public string Tags { get; set; } = default!;
+    [Parameter] public string? StartDate { get; set; }
+    [Parameter] public string? EndDate { get; set; }
+    [Parameter] public bool ShowDuration { get; set; } = false;
 
-    [Parameter]
-    public string Image { get; set; }
+    private ElementReference CardRef;
 
-    [Parameter]
-    public string ImageAlt { get; set; }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && ShowDuration && !string.IsNullOrEmpty(StartDate))
+        {
+            // Initialize Popmotion-based corner fold animation
+            await JSRuntime.InvokeVoidAsync("initCornerFoldAnimation", CardRef);
+        }
+    }
 
-    [Parameter]
-    public string ImageClass { get; set; }
+    private string CalculateDuration()
+    {
+        if (string.IsNullOrEmpty(StartDate)) return string.Empty;
 
-    [Parameter]
-    public string? CardClass { get; set; }
+        DateTime start = DateTime.Parse(StartDate);
+        DateTime end = string.IsNullOrEmpty(EndDate) ? DateTime.Now : DateTime.Parse(EndDate);
 
-    [Parameter]
-    public string Body { get; set; }
+        int years = end.Year - start.Year;
+        int months = end.Month - start.Month;
+        if (end.Day < start.Day) months--;
 
-    [Parameter]
-    public string Tags { get; set; }
+        if (months < 0)
+        {
+            years--;
+            months += 12;
+        }
+
+        if (years > 0)
+        {
+            return years == 1
+                ? $"{years} yr {months} mos"
+                : $"{years} yrs {months} mos";
+        }
+        return $"{months} mos";
+    }
 }
+
+<style>
+    /* ExperienceCard.razor.css */
+
+/* Container to show that behind the card is truly visible. 
+   This might just be your page or another container. */
+.card-container {
+    position: relative;
+    margin: 20px;
+
+    /* Example background behind the card, so you can see 
+       the transparency when the corner folds up. */
+    background: radial-gradient(circle, #f0f0f0 0%, #ddd 100%);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* The "card" we are clipping. */
+.card {
+    display: flex;
+    position: relative;
+
+    /* A complex gradient for demonstration. 
+       Adjust as needed to match your design. */
+    background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+    
+    /* Key: Clip the bottom-right corner so it’s actually transparent. */
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - 50px),
+        calc(100% - 50px) 100%,
+        0 100%
+    );
+
+    width: 400px;  /* Example size; tweak as needed */
+    height: 250px;
+    border-radius: 8px;
+    overflow: visible; /* so corner fold can extend outside if needed */
+}
+
+/* Example layout for the figure (left side image) */
+.card-figure {
+    min-width: 140px;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* The main body content to the right of the figure */
+.card-body {
+    flex: 1;
+    padding: 1rem;
+    position: relative;
+}
+
+/* Example styling for your title */
+.card-title {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+/* A simple container for tags */
+.card-tags {
+    margin-top: 1rem;
+}
+
+/* The text behind the fold corner. 
+   It sits exactly in the bottom-right area that got clipped. 
+   So once the corner is folded up, you see this. */
+.corner-text {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 0; /* behind the corner-fold */
+
+    background-color: rgba(0, 0, 0, 0.6); /* or any color you like */
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+
+    /* Slight offset to look "tucked under" the corner */
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+/* The corner flap that we rotate in 3D with Popmotion. */
+.corner-fold {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+
+    /* Match the same gradient as the card, or approximate it. 
+       You may need to tweak background-position to align. */
+    background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+
+    /* Pivot around bottom-right corner so it folds up. */
+    transform-origin: bottom right;
+    transform: rotateX(0deg);
+    backface-visibility: hidden; /* Hide the backside when flipped */
+    
+    /* No CSS transition because Popmotion will animate transform. */
+}
+</style>

@@ -4,6 +4,17 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- Performance Optimizations -->
+    <!-- Enable AOT compilation for maximum performance (requires wasm-tools-net6 workload) -->
+    <!-- To install: dotnet workload install wasm-tools-net6 -->
+    <RunAOTCompilation Condition="'$(RunAOTCompilation)' == ''">false</RunAOTCompilation>
+    <PublishTrimmed>true</PublishTrimmed>
+    <TrimMode>link</TrimMode>
+    <BlazorEnableCompression>true</BlazorEnableCompression>
+    <!-- Optimize IL code during publish -->
+    <BlazorWebAssemblyPreserveCollationData>false</BlazorWebAssemblyPreserveCollationData>
+    <InvariantGlobalization>true</InvariantGlobalization>
   </PropertyGroup>
 
   <ItemGroup>

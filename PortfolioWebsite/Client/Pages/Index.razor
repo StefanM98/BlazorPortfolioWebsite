@@ -1,5 +1,6 @@
 ﻿@page "/"
 
+@using Microsoft.JSInterop
 @inject IJSRuntime jsRuntime
 
 @using PortfolioWebsite.Client.Shared.Components;
@@ -25,10 +26,10 @@
                 <h1 class="text-xl font-bold font-mono" data-aos="fade-right" data-aos-delay="200">Hi, my name is</h1>
                 <h1 class="text-7xl font-bold" data-aos="fade-right" data-aos-delay="400">Stefan Milanovic</h1>
                 <p class="pt-5 pb-6 text-xl font-bold" data-aos="fade-right" data-aos-delay="600">
-                    — Software Engineer with 3+ years of industry experience
+                    — Senior Software Developer with 5+ years of industry experience
                 </p>
                 <p class="pt-3 pb-9 text-xl" data-aos="fade-right" data-aos-delay="800">
-                    Currently serving as a Junior Software Developer and Data Scientist at <a class="font-bold" href="https://www.linkedin.com/company/meritus-health">Meritus Health</a>, mastering C#, React, Next.js, and Python to create groundbreaking tools that enhance patient care and promote community engagement.
+                    Currently serving as a Senior Software Developer and Data Scientist at <a class="font-bold" href="https://www.linkedin.com/company/meritus-health">Meritus Health</a>, where I've grown from Junior to Senior over 3+ years, mastering C#, React, Next.js, and Python to create groundbreaking tools that enhance patient care and promote community engagement.
                 </p>
                 <button class="btn btn-primary my-1" data-aos="fade-right" data-aos-delay="1000" data-aos-duration="1000">Blog Coming Soon!</button>
             </div>
@@ -55,19 +56,21 @@
                         websites, games, and more.
                     </strong>
                 </p>
-                <p data-aos="fade-right" data-aos-delay="400">Here are a few technologies I’ve been working with recently:</p>
+                <p data-aos="fade-right" data-aos-delay="400">Here are a few technologies I've been working with recently:</p>
                 <ul class="tech-list">
-                    <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="500">C#</li>
-                    <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="600">.NET</li>
-                    <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="700">.NET MAUI</li>
-                    <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="800">Blazor WebAssembly</li>
+                    <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="500">C# & .NET Core</li>
+                    <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="600">Entity Framework Core</li>
+                    <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="700">React & React Native</li>
+                    <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="800">TypeScript</li>
                     <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="900">Next.js</li>
-                    <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="1000">React & Redux</li>
-                    <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="1100">TypeScript</li>
-                    <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="1200">Tailwind CSS</li>
+                    <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="1000">Swift</li>
+                    <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="1100">Python</li>
+                    <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="1200">SQL</li>
+                    <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="1300">SSIS</li>
+                    <li data-aos="fade-right" data-aos-anchor=".tech-list" data-aos-delay="1400">Tailwind CSS</li>
                 </ul>
                 <p class="py-2 mt-[60px]" data-aos="fade-right">
-                    At present, I am working at <a href="https://www.linkedin.com/company/meritus-health">Meritus Health</a>, where I utilize my skills in C#, .NET, React, Next.js, and Python to develop state-of-the-art tools and captivating user experiences that directly benefit our patients and foster community engagement.
+                    At present, I am working as a <strong>Senior Software Developer and Data Scientist</strong> at <a href="https://www.linkedin.com/company/meritus-health">Meritus Health</a>, where I've progressed from Junior to Senior over 3+ years. I utilize my skills in C#, .NET, React, Next.js, and Python to develop state-of-the-art tools and captivating user experiences that directly benefit our patients and foster community engagement.
                 </p>
 
             </div>
@@ -112,7 +115,7 @@
                     part-time while managing a full course load. This invaluable experience allowed me to gain practical <strong>real-world knowledge</strong> alongside my academic pursuits.
                 </p>
                 <p class="py-6" data-aos="fade-right">
-                    In my current role as a <strong>Junior Software Developer and Data Scientist</strong> at <strong>Meritus Health</strong>, I continue to develop my expertise in C#, React, and Next.js. My work focuses on creating innovative tools that elevate patient care and foster stronger community engagement, making a significant difference in people's lives.
+                    In my current role as a <strong>Senior Software Developer and Data Scientist</strong> at <strong>Meritus Health</strong>, I have progressed from Junior to Senior over 3+ years, demonstrating continuous growth and impact. I continue to develop my expertise in C#, React, and Next.js, creating innovative tools that elevate patient care and foster stronger community engagement, making a significant difference in people's lives.
                 </p>
             </div>
             <div class="flex-shrink-0 w-full lg:w-3/5 lg:mt-40 min-w-fit" data-aos="fade-right">
@@ -154,33 +157,78 @@
                         </div>
                     </li>
                     <div class="xp-divider">2019</div>
-                    <li href="#experience-2019" data-content="2019" class="step step-primary">
+                    <li data-content="2019" class="step step-primary">
                         <div class="xp-container">
                             <ExperienceCard Title="JLG Industries" Body="Started Digital Solutions Intern role at JLG Industries"
                                             Image="images/JLG.svg" ImageAlt="JLG Industries Logo" ImageClass="w-[100px]"
-                                            Tags="TS,JS,Python,Angular,Node.js,HTML/CSS,Jenkins,Jira" />
+                                            Tags="TS,JS,Python,Angular,Node.js,HTML/CSS,Jenkins,Jira"
+                                            StartDate="Jun 2019" EndDate="Mar 2022" />
                         </div>
                     </li>
                     <div class="xp-divider">2022</div>
-                    <li href="#experience-2022" data-content="2022" class="step step-primary current">
+                    <li href="#experience-2022" data-content="2022" class="step step-primary">
                         <div class="xp-container">
                             <ExperienceCard Title="College" Body="Graduated as a Bachelor of Science in Software Engineering"
                                             Image="images/ship-logo.webp" ImageAlt="Shippensburg University of Pennsylvania Stacked Logo"
-                                            ImageClass="w-[120px]" Tags="Cum Laude,Data Science Minor,ABET Accredited" />
+                                            ImageClass="w-[120px]" Tags="Cum Laude,Data Science Minor,ABET Accredited"
+                                            StartDate="Aug 2018" EndDate="May 2022" />
                             <ExperienceCard Title="Independent" Body="Started Professional Career Development Break"
                                             Image="images/calendar-icon.svg" ImageAlt="Calendar Icon" ImageClass="w-[120px]"
-                                            Tags="C#,.NET Core,Blazor,Xamarin/Maui" />
+                                            Tags="C#,.NET Core,Blazor,Xamarin/Maui"
+                                            StartDate="May 2022" EndDate="Jan 2023" />
                         </div>
                     </li>
-                    <div class="xp-divider">2023</div>
-                    <li data-content="2023" class="step step-neutral">
+                    <div class="xp-divider">2022</div>
+                    <li data-content="2022" class="step step-primary">
                         <div class="xp-container">
                             <ExperienceCard Title="Meritus Health" Body="Started Junior Software Developer / Data Scientist role at Meritus Health"
                                             Image="images/meritus-logo.png" ImageAlt="Meritus Health Logo" ImageClass="w-[100px]"
-                                            Tags="TS,React,Next.js,Node.js,Python" />
+                                            Tags="C#,.NET,React,Next.js,Python"
+                                            StartDate="Nov 2022" EndDate="Aug 2023" />
+                        </div>
+                    </li>
+                    <div class="xp-divider">2023</div>
+                    <li data-content="2023" class="step step-primary">
+                        <div class="xp-container">
+                            <ExperienceCard Title="Meritus Health" Body="Promoted to Software Developer / Data Scientist"
+                                            Image="images/meritus-logo.png" ImageAlt="Meritus Health Logo" ImageClass="w-[100px]"
+                                            Tags="C#,.NET,React,Next.js,Python"
+                                            StartDate="Aug 2023" EndDate="May 2025" />
+                        </div>
+                    </li>
+                    <div class="xp-divider">2025</div>
+                    <li data-content="2025" class="step step-primary current">
+                        <div class="xp-container">
+                            <ExperienceCard Title="Meritus Health" Body="Promoted to Senior Software Developer / Data Scientist"
+                                            Image="images/meritus-logo.png" ImageAlt="Meritus Health Logo" ImageClass="w-[100px]"
+                                            Tags="C#,.NET,React,Next.js,Python,Data Science"
+                                            StartDate="May 2025" />
                         </div>
                     </li>
                 </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+@* Current Role Section *@
+<section id="current-role" class="bg-black bg-opacity-20">
+    <div class="hero">
+        <div class="hero-content w-full flex-col py-12">
+            <div class="w-full text-center mb-5">
+                <h2 class="text-5xl font-bold" data-aos="fade-down">Current Role</h2>
+                <div class="w-full my-10">
+                    <div class="w-full xp-container">
+                        <ExperienceCard Title="Meritus Health"
+                                      Body="Senior Software Developer / Data Scientist"
+                                      Image="images/meritus-logo.png"
+                                      ImageAlt="Meritus Health Logo"
+                                      ImageClass="w-[100px]"
+                                      Tags="C#,.NET,React,Next.js,Python,Data Science"
+                                      StartDate="May 2025"
+                                      ShowDuration="true" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -162,3 +162,27 @@ html {
 .scrolled-down .dropdown-content {
     @apply hidden;
 }
+
+/* Ensures child elements can be transformed in 3D. */
+.perspective-800 {
+    perspective: 800px; /* adjust to taste */
+}
+
+/* The 3D flap container uses preserve-3d so front and back can exist. */
+.preserve-3d {
+    transform-style: preserve-3d;
+}
+
+/* Hides the backside of a 3D element when flipped. */
+.backface-hidden {
+    backface-visibility: hidden;
+}
+
+/* By default, the flap is not rotated. On hover, we rotate 180° around X. */
+.flip-3d {
+    transition: transform 0.6s ease;
+    transform-origin: bottom right;
+}
+.group:hover .flip-3d {
+    transform: rotateX(180deg);
+}

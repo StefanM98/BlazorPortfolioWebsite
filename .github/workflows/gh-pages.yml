@@ -15,9 +15,13 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '6.0.x'
-        
-    - name: Publish .NET Project
-      run: dotnet publish PortfolioWebsite/Client/PortfolioWebsite.Client.csproj -c Release -o release --nologo
+
+    # Install wasm-tools workload for AOT compilation (significant performance boost)
+    - name: Install wasm-tools workload
+      run: dotnet workload install wasm-tools-net6
+
+    - name: Publish .NET Project with AOT
+      run: dotnet publish PortfolioWebsite/Client/PortfolioWebsite.Client.csproj -c Release -o release --nologo -p:RunAOTCompilation=true
       
     # Add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project.
     - name: Add .nojekyll file

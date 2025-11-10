@@ -5,24 +5,24 @@
      data-aos="fade-right" data-aos-offset="100"
      @ref="CardRef">
 
-    <figure class="pl-4">
-        <img class="@ImageClass" src="@Image" alt="@ImageAlt" />
+    <figure class="flex items-center justify-center px-6 py-4">
+        <img class="@ImageClass object-contain" src="@Image" alt="@ImageAlt" />
     </figure>
 
-    <div class="card-body">
-        <h2 class="card-title">@Title</h2>
-        <p>@Body</p>
+    <div class="card-body flex-1">
+        <h2 class="card-title text-lg">@Title</h2>
+        <p class="text-sm">@Body</p>
 
-        <div class="card-actions justify-start flex-wrap gap-1">
+        <div class="card-actions justify-start mt-2">
             @foreach (var tag in Tags.Split(','))
             {
-                <span class="badge badge-outline">@tag</span>
+                <span class="badge badge-outline badge-sm">@tag</span>
             }
         </div>
 
         @if (ShowDuration && !string.IsNullOrEmpty(StartDate))
         {
-            <div class="text-sm opacity-70 mt-2">
+            <div class="text-xs opacity-70 mt-1">
                 @StartDate - @(string.IsNullOrEmpty(EndDate) ? "Present" : EndDate)
                 (@CalculateDuration())
             </div>

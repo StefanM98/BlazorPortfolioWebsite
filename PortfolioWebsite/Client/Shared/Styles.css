@@ -115,14 +115,24 @@ html {
 }
 
 .xp-container .card {
-    @apply m-auto;
-    max-width: 450px;
+    @apply m-auto flex-row;
+    max-width: 500px;
     width: 100%;
+    min-height: 200px;
 }
 
 .xp-container .card figure {
-    @apply flex items-center justify-center;
-    min-width: 140px;
+    @apply shrink-0;
+    width: 140px;
+    max-width: 140px;
+}
+
+.xp-container .card .card-body {
+    @apply p-4;
+}
+
+.xp-container .card .card-actions {
+    @apply flex-wrap;
 }
 
 .xp-container .card:last-child {

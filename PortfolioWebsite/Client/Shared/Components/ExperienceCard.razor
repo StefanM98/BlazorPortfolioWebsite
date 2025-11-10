@@ -1,31 +1,45 @@
 @using Microsoft.JSInterop
 @inject IJSRuntime JSRuntime
 
-<div class="card card-side bg-base-100 shadow-xl @CardClass"
-     data-aos="fade-right" data-aos-offset="100"
-     @ref="CardRef">
+<div class="card-container">
+    <div class="card
+                shadow-xl relative
+                @CardClass"
+         data-aos="fade-right" data-aos-offset="100"
+         @ref="CardRef">
 
-    <figure class="pl-4">
-        <img class="@ImageClass" src="@Image" alt="@ImageAlt" />
-    </figure>
+        <!-- Example figure (left image) -->
+        <figure class="card-figure">
+            <img class="@ImageClass" src="@Image" alt="@ImageAlt" />
+        </figure>
 
-    <div class="card-body">
-        <h2 class="card-title">@Title</h2>
-        <p>@Body</p>
+        <!-- Card body content -->
+        <div class="card-body">
+            <h2 class="card-title">@Title</h2>
+            <p>@Body</p>
 
-        <div class="card-actions justify-start flex-wrap gap-1">
-            @foreach (var tag in Tags.Split(','))
-            {
-                <span class="badge badge-outline">@tag</span>
-            }
+            <!-- Example of tags -->
+            <div class="card-tags">
+                @foreach (var tag in Tags.Split(','))
+                {
+                    <span class="badge badge-outline">@tag</span>
+                }
+            </div>
         </div>
 
         @if (ShowDuration && !string.IsNullOrEmpty(StartDate))
         {
-            <div class="text-sm opacity-70 mt-2">
-                @StartDate - @(string.IsNullOrEmpty(EndDate) ? "Present" : EndDate)
-                (@CalculateDuration())
+            <!-- The text behind the folded corner.
+                 This is visible once the corner rotates up. -->
+            <div class="corner-text">
+                <p class="text-sm font-medium">
+                    @StartDate - @(string.IsNullOrEmpty(EndDate) ? "Present" : EndDate)
+                </p>
+                <p class="text-xs opacity-70">@CalculateDuration()</p>
             </div>
+
+            <!-- The corner flap itself, same size as the clipped corner -->
+            <div class="corner-fold"></div>
         }
     </div>
 </div>
@@ -43,6 +57,23 @@
     [Parameter] public bool ShowDuration { get; set; } = false;
 
     private ElementReference CardRef;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && ShowDuration && !string.IsNullOrEmpty(StartDate))
+        {
+            try
+            {
+                // Initialize Popmotion-based corner fold animation
+                await JSRuntime.InvokeVoidAsync("initCornerFoldAnimation", CardRef);
+            }
+            catch (Exception ex)
+            {
+                // Gracefully handle if the animation library isn't loaded yet
+                Console.WriteLine($"Corner fold animation failed: {ex.Message}");
+            }
+        }
+    }
 
     private string CalculateDuration()
     {

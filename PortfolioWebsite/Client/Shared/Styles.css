@@ -115,33 +115,7 @@ html {
 }
 
 .xp-container .card {
-    @apply m-auto flex-row;
-    max-width: 500px;
-    width: 100%;
-    min-height: 300px;
-}
-
-.xp-container .card figure {
-    @apply shrink-0;
-    width: 140px;
-    max-width: 140px;
-}
-
-.xp-container .card .card-body {
-    @apply p-4;
-}
-
-.xp-container .card .card-actions {
-    @apply flex-wrap;
-}
-
-.card-side figure > * {
-    margin-left: 30px;
-}
-
-.steps-vertical .step {
-    width: 600px;
-    text-align: left;
+    @apply m-auto;
 }
 
 .xp-container .card:last-child {
@@ -187,28 +161,4 @@ html {
 
 .scrolled-down .dropdown-content {
     @apply hidden;
-}
-
-/* Ensures child elements can be transformed in 3D. */
-.perspective-800 {
-    perspective: 800px; /* adjust to taste */
-}
-
-/* The 3D flap container uses preserve-3d so front and back can exist. */
-.preserve-3d {
-    transform-style: preserve-3d;
-}
-
-/* Hides the backside of a 3D element when flipped. */
-.backface-hidden {
-    backface-visibility: hidden;
-}
-
-/* By default, the flap is not rotated. On hover, we rotate 180° around X. */
-.flip-3d {
-    transition: transform 0.6s ease;
-    transform-origin: bottom right;
-}
-.group:hover .flip-3d {
-    transform: rotateX(180deg);
 }

@@ -30,8 +30,13 @@
 
     <div id="app" class="bg-gradient-to-br main-gradient">
         <!-- App loading spinner -->
-        <div id="loading" class="grid place-items-center h-screen">
-            <progress class="progress progress-primary w-56"></progress>
+        <div id="loading" class="loading-container">
+            <div class="loading-content">
+                <svg class="logo-spinner" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <image href="./images/logo.svg" width="200" height="200" />
+                </svg>
+                <div class="spinner-ring"></div>
+            </div>
         </div>
     </div>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -75,7 +80,22 @@
         document.addEventListener('scroll', throttledScrollHandler, { passive: true });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/TagCloud@2.2.0/dist/TagCloud.min.js"></script>
-    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <script>
+        // Smooth loading transition
+        Blazor.start().then(() => {
+            const loadingElement = document.getElementById('loading');
+            if (loadingElement) {
+                // Add fade-out class
+                loadingElement.classList.add('fade-out');
+
+                // Remove the loading element from DOM after transition completes
+                setTimeout(() => {
+                    loadingElement.remove();
+                }, 600); // Match the CSS transition duration
+            }
+        });
+    </script>
 </body>
 
 </html>

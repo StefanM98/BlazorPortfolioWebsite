@@ -32,9 +32,7 @@
         <!-- App loading spinner -->
         <div id="loading" class="loading-container">
             <div class="loading-content">
-                <svg class="logo-spinner" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <image href="./images/logo.svg" width="200" height="200" />
-                </svg>
+                <img src="./apple-touch-icon.png" alt="Loading..." class="logo-spinner" />
                 <div class="spinner-ring"></div>
             </div>
         </div>
@@ -82,17 +80,25 @@
     <script src="https://cdn.jsdelivr.net/npm/TagCloud@2.2.0/dist/TagCloud.min.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script>
-        // Smooth loading transition
+        // Smooth loading transition with minimum display time
+        const startTime = Date.now();
+        const minLoadingTime = 800; // Minimum time to show loading spinner (in ms)
+
         Blazor.start().then(() => {
             const loadingElement = document.getElementById('loading');
             if (loadingElement) {
-                // Add fade-out class
-                loadingElement.classList.add('fade-out');
+                const elapsedTime = Date.now() - startTime;
+                const remainingTime = Math.max(0, minLoadingTime - elapsedTime);
 
-                // Remove the loading element from DOM after transition completes
+                // Wait for minimum display time before fading out
                 setTimeout(() => {
-                    loadingElement.remove();
-                }, 600); // Match the CSS transition duration
+                    loadingElement.classList.add('fade-out');
+
+                    // Remove the loading element from DOM after transition completes
+                    setTimeout(() => {
+                        loadingElement.remove();
+                    }, 500); // Match the CSS transition duration
+                }, remainingTime);
             }
         });
     </script>

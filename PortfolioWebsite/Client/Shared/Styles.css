@@ -169,7 +169,9 @@ html {
     @apply fixed inset-0 flex items-center justify-center bg-gradient-to-br;
     --tw-gradient-stops: #001883, #3e00ff, #001591, #020033;
     z-index: 9999;
-    transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+    opacity: 0;
+    animation: fade-in 0.3s ease-in 0.1s forwards;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
 }
 
 .loading-container.fade-out {
@@ -179,26 +181,37 @@ html {
 
 .loading-content {
     @apply relative flex items-center justify-center;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
 }
 
 .logo-spinner {
     @apply absolute;
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
+    z-index: 2;
     animation: pulse-logo 2s ease-in-out infinite;
-    filter: drop-shadow(0 0 20px rgba(179, 197, 239, 0.5));
+    filter: drop-shadow(0 0 15px rgba(179, 197, 239, 0.4));
 }
 
 .spinner-ring {
     @apply absolute rounded-full;
-    width: 180px;
-    height: 180px;
-    border: 3px solid transparent;
+    width: 140px;
+    height: 140px;
+    border: 4px solid transparent;
     border-top-color: #b3c5ef;
     border-right-color: #b3c5ef;
-    animation: spin 1.5s linear infinite;
+    animation: spin 1.2s linear infinite;
+    z-index: 1;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes spin {
@@ -213,10 +226,10 @@ html {
 @keyframes pulse-logo {
     0%, 100% {
         transform: scale(1);
-        filter: drop-shadow(0 0 20px rgba(179, 197, 239, 0.5));
+        filter: drop-shadow(0 0 15px rgba(179, 197, 239, 0.4));
     }
     50% {
-        transform: scale(1.05);
-        filter: drop-shadow(0 0 30px rgba(179, 197, 239, 0.8));
+        transform: scale(1.08);
+        filter: drop-shadow(0 0 25px rgba(179, 197, 239, 0.7));
     }
 }

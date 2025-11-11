@@ -13,11 +13,13 @@ module.exports = {
   ],
   daisyui: {
     themes: [
-      { dark: {
-          ...require("daisyui/src/colors/themes")["[data-theme=night]"],
+      {
+        dark: {
           "primary": "#b3c5ef",
           "primary-focus": "#b3c5ef",
-      }}
+          "base-100": "#1d1f2f",
+        }
+      }
     ]
   }
 }

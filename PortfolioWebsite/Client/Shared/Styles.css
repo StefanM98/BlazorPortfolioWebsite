@@ -151,7 +151,8 @@ html {
 }
 
 /* AOS - Navbar */
-.scrolled-down .navbar {
+/* Disabled navbar hide on scroll - navbar now always visible */
+/*.scrolled-down .navbar {
     @apply translate-y-[-4rem];
 }
 
@@ -161,4 +162,4 @@ html {
 
 .scrolled-down .dropdown-content {
     @apply hidden;
-}
+}*/

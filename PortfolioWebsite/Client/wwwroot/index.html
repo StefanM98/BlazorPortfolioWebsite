@@ -82,24 +82,36 @@
     <script>
         // Smooth loading transition with minimum display time
         const startTime = Date.now();
-        const minLoadingTime = 1000; // Minimum time to show loading spinner (in ms)
+        const minLoadingTime = 800; // Minimum time to show loading spinner (in ms)
 
         Blazor.start().then(() => {
-            const loadingBackdrop = document.getElementById('loading-backdrop');
-            if (loadingBackdrop) {
-                const elapsedTime = Date.now() - startTime;
-                const remainingTime = Math.max(0, minLoadingTime - elapsedTime);
+            // Wait a moment for Blazor to fully render
+            setTimeout(() => {
+                // Initialize AOS after Blazor renders
+                if (typeof AOS !== 'undefined') {
+                    AOS.init({
+                        duration: 1000,
+                        once: true,
+                        offset: 50
+                    });
+                }
 
-                // Wait for minimum display time before fading out
-                setTimeout(() => {
-                    loadingBackdrop.classList.add('fade-out');
+                const loadingBackdrop = document.getElementById('loading-backdrop');
+                if (loadingBackdrop) {
+                    const elapsedTime = Date.now() - startTime;
+                    const remainingTime = Math.max(0, minLoadingTime - elapsedTime);
 
-                    // Remove the loading element from DOM after transition completes
+                    // Wait for minimum display time before fading out
                     setTimeout(() => {
-                        loadingBackdrop.remove();
-                    }, 600); // Match the CSS transition duration
-                }, remainingTime);
-            }
+                        loadingBackdrop.classList.add('fade-out');
+
+                        // Remove the loading element from DOM after transition completes
+                        setTimeout(() => {
+                            loadingBackdrop.remove();
+                        }, 700); // Match the CSS transition duration
+                    }, remainingTime);
+                }
+            }, 100); // Small delay to ensure DOM is ready
         });
     </script>
 </body>

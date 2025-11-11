@@ -177,12 +177,13 @@ html {
     justify-content: center;
     z-index: 9999;
     opacity: 0;
-    animation: backdrop-fade-in 0.4s ease-out 0.1s forwards;
-    transition: opacity 0.6s ease-in-out;
+    animation: backdrop-fade-in 0.4s ease-out 0.15s forwards;
+    transition: opacity 0.7s ease-out, visibility 0.7s ease-out;
 }
 
 .loading-backdrop.fade-out {
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
 }
 

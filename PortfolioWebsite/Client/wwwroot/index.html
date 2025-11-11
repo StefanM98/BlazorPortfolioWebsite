@@ -28,15 +28,15 @@
         </div>
     </div>
 
-    <div id="app" class="bg-gradient-to-br main-gradient">
-        <!-- App loading spinner -->
-        <div id="loading" class="loading-container">
-            <div class="loading-content">
-                <img src="./apple-touch-icon.png" alt="Loading..." class="logo-spinner" />
-                <div class="spinner-ring"></div>
-            </div>
+    <!-- Loading backdrop -->
+    <div id="loading-backdrop" class="loading-backdrop">
+        <div class="spinner-container">
+            <div class="spinner-circle"></div>
+            <img src="./apple-touch-icon.png" alt="Loading..." class="spinner-logo" />
         </div>
     </div>
+
+    <div id="app" class="bg-gradient-to-br main-gradient"></div>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         let lastKnownScrollPosition = -1;
@@ -82,22 +82,22 @@
     <script>
         // Smooth loading transition with minimum display time
         const startTime = Date.now();
-        const minLoadingTime = 800; // Minimum time to show loading spinner (in ms)
+        const minLoadingTime = 1000; // Minimum time to show loading spinner (in ms)
 
         Blazor.start().then(() => {
-            const loadingElement = document.getElementById('loading');
-            if (loadingElement) {
+            const loadingBackdrop = document.getElementById('loading-backdrop');
+            if (loadingBackdrop) {
                 const elapsedTime = Date.now() - startTime;
                 const remainingTime = Math.max(0, minLoadingTime - elapsedTime);
 
                 // Wait for minimum display time before fading out
                 setTimeout(() => {
-                    loadingElement.classList.add('fade-out');
+                    loadingBackdrop.classList.add('fade-out');
 
                     // Remove the loading element from DOM after transition completes
                     setTimeout(() => {
-                        loadingElement.remove();
-                    }, 500); // Match the CSS transition duration
+                        loadingBackdrop.remove();
+                    }, 600); // Match the CSS transition duration
                 }, remainingTime);
             }
         });

@@ -205,6 +205,18 @@ body [data-aos].aos-animate {
     pointer-events: auto;
 }
 
+/* Prevent AOS animations until loading is complete */
+body:not(.loading-complete) [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+}
+
+body.loading-complete [data-aos] {
+    opacity: 0;
+    pointer-events: auto;
+}
+
 .spinner-container {
     position: relative;
     width: 120px;

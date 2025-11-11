@@ -28,15 +28,12 @@
         </div>
     </div>
 
-    <!-- Loading backdrop -->
-    <div id="loading-backdrop" class="loading-backdrop">
-        <div class="spinner-container">
-            <div class="spinner-circle"></div>
-            <img src="./apple-touch-icon.png" alt="Loading..." class="spinner-logo" />
+    <div id="app" class="bg-gradient-to-br main-gradient">
+        <!-- App loading spinner -->
+        <div id="loading" class="grid place-items-center h-screen">
+            <progress class="progress progress-primary w-56"></progress>
         </div>
     </div>
-
-    <div id="app" class="bg-gradient-to-br main-gradient"></div>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         let lastKnownScrollPosition = -1;
@@ -78,30 +75,7 @@
         document.addEventListener('scroll', throttledScrollHandler, { passive: true });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/TagCloud@2.2.0/dist/TagCloud.min.js"></script>
-    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
-    <script>
-        // Smooth loading transition with minimum display time
-        const startTime = Date.now();
-        const minLoadingTime = 1000; // Minimum time to show loading spinner (in ms)
-
-        Blazor.start().then(() => {
-            const loadingBackdrop = document.getElementById('loading-backdrop');
-            if (loadingBackdrop) {
-                const elapsedTime = Date.now() - startTime;
-                const remainingTime = Math.max(0, minLoadingTime - elapsedTime);
-
-                // Wait for minimum display time before fading out
-                setTimeout(() => {
-                    loadingBackdrop.classList.add('fade-out');
-
-                    // Remove the loading element from DOM after transition completes
-                    setTimeout(() => {
-                        loadingBackdrop.remove();
-                    }, 600); // Match the CSS transition duration
-                }, remainingTime);
-            }
-        });
-    </script>
+    <script src="_framework/blazor.webassembly.js"></script>
 </body>
 
 </html>

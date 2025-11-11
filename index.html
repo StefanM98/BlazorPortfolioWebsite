@@ -95,63 +95,57 @@
                     const remainingTime = Math.max(0, minLoadingTime - elapsedTime);
 
                     setTimeout(() => {
-                        // Initialize AOS first (but don't show content yet)
-                        if (typeof AOS !== 'undefined') {
-                            AOS.init({
-                                duration: 400,
-                                once: true,
-                                offset: 0,
-                                delay: 0,
-                                easing: 'ease-out',
-                                disable: false,
-                                startEvent: 'DOMContentLoaded',
-                                initClassName: 'aos-init',
-                                animatedClassName: 'aos-animate',
-                                useClassNames: false,
-                                disableMutationObserver: false,
-                                debounceDelay: 50,
-                                throttleDelay: 99,
-                                mirror: false,
-                                anchorPlacement: 'top-bottom'
-                            });
-                            setTimeout(() => AOS.refresh(), 50);
+                        // Start cross-fade: backdrop fades out while content fades in
+                        const loadingBackdrop = document.getElementById('loading-backdrop');
+                        const appElement = document.getElementById('app');
+
+                        // Start both transitions simultaneously for smooth cross-fade
+                        if (appElement) {
+                            appElement.classList.add('app-ready');
                         }
 
-                        // Start cross-fade: backdrop fades out while content fades in
+                        if (loadingBackdrop) {
+                            loadingBackdrop.classList.add('fade-out');
+                        }
+
+                        // After backdrop is completely gone, initialize and trigger AOS
                         setTimeout(() => {
-                            const loadingBackdrop = document.getElementById('loading-backdrop');
-                            const appElement = document.getElementById('app');
-
-                            // Start both transitions simultaneously for smooth cross-fade
-                            if (appElement) {
-                                appElement.classList.add('app-ready');
-                            }
-
                             if (loadingBackdrop) {
-                                loadingBackdrop.classList.add('fade-out');
+                                loadingBackdrop.remove();
                             }
 
-                            // Refresh AOS as content appears
+                            // Enable AOS animations by adding class to body
+                            document.body.classList.add('loading-complete');
+
+                            // Initialize AOS after loading is complete
                             if (typeof AOS !== 'undefined') {
-                                setTimeout(() => AOS.refresh(), 100);
+                                AOS.init({
+                                    duration: 400,
+                                    once: true,
+                                    offset: 0,
+                                    delay: 0,
+                                    easing: 'ease-out',
+                                    disable: false,
+                                    startEvent: 'DOMContentLoaded',
+                                    initClassName: 'aos-init',
+                                    animatedClassName: 'aos-animate',
+                                    useClassNames: false,
+                                    disableMutationObserver: false,
+                                    debounceDelay: 50,
+                                    throttleDelay: 99,
+                                    mirror: false,
+                                    anchorPlacement: 'top-bottom'
+                                });
+
+                                // Trigger animations immediately
+                                setTimeout(() => {
+                                    AOS.refresh();
+                                    // Scroll trigger to ensure detection
+                                    window.scrollBy(0, 1);
+                                    setTimeout(() => window.scrollBy(0, -1), 10);
+                                }, 50);
                             }
-
-                            // Remove backdrop after fade completes and trigger final AOS
-                            setTimeout(() => {
-                                if (loadingBackdrop) {
-                                    loadingBackdrop.remove();
-                                }
-
-                                // Final AOS refresh with scroll trigger
-                                if (typeof AOS !== 'undefined') {
-                                    setTimeout(() => {
-                                        AOS.refresh();
-                                        window.scrollBy(0, 1);
-                                        setTimeout(() => window.scrollBy(0, -1), 10);
-                                    }, 50);
-                                }
-                            }, 600);
-                        }, 50);
+                        }, 600);
                     }, remainingTime);
                 } else {
                     // Content not ready, check again
